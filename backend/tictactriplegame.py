@@ -18,7 +18,6 @@ class board:
         if(self.redTurn):
             redMask = redMask | maskPos
 
-
         self.redTurn = not self.redTurn
     
 
