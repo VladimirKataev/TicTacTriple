@@ -11,7 +11,7 @@
 
   <p> The idea behind this repo is to create a project for a browser-based 3x3x3 tic-tac-toe game. As such it will have 27 spaces, 2 colours (red vs blue) This creates a couple smaller considerations </p>
 
-  <img src="images/anim.gif">
+  <img src="images/anim.gif" alt="imagine a good image made in blender and gimp here">
 
   <h2>Considerations:</h2>
   <p>As it is a 3x3x3 grid, it will have 27 spots. Thus, it will presumably be done as 2 32bit integers to store the board, for speed and efficiency. When 3x3 grids are done, a common implementation is to memorize all the possible lines to check along. on a 3x3x3 grid there are [orthogonal, 2d diagonal, 3d diagonal] (9*3) + (6*3) + 4 lines along which to have a victory condition. The total number is 49. Fortunately, as pieces are affected by gravity, there are at most only 9 moves one can make.</p>
