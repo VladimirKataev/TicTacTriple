@@ -3,12 +3,44 @@
   <head>
 
     <title> Visualiser </title>
+    <link rel="stylesheet" href="styles.css">
 
+    <script>
+      //for on-canvas positions, use vh
+      //horizontal use h
+      //vertical use v
+      //xyz are reserved for on-board positions
+
+      let zv = 40;
+      let zh = 0;
+      let xv = 15;
+      let xh = 25;
+      let yv = 15;
+      let yh = -15;
+      let ov = 200;
+      let oh = 200;
+
+      
+      var gfx = document.getElementById("gfx");
+      gfx = gfx.getContext("2d");
+
+      function drawAxes(){
+	  gfx.moveTo(oh, ov);
+	  gfx.lineTo(0,0);
+      }
+
+      drawAxes();
+
+    </script>
+    
+    
   </head>
 
   <body>
 
-    You either die a Hubert J Farnsworth, or live long enough to become Rick Sanchez.
+    <canvas id="gfx" height="400" width="400">
+
+    </canvas>
 
   </body>
   
