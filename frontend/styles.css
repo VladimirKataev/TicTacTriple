@@ -13,3 +13,6 @@ img{
     width:480px;
 }
 
+canvas{
+    border-style: solid;
+}
