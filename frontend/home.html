@@ -32,11 +32,12 @@
       let oh = 200;
 
       
-      var gfx = document.getElementById("gfx").getContext("2d");
+      let gfx = document.getElementById("gfx").getContext("2d");
 
       function drawAxes(){
 	  gfx.moveTo(oh, ov);
-	  gfx.lineTo(0,0);
+	  gfx.lineTo(10,10);
+	  gfx.stroke();
       }
 
       drawAxes();
