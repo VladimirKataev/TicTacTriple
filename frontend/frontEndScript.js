@@ -3,12 +3,12 @@
 //vertical use v
 //xyz are reserved for on-board positions
 
-let zv = -60;
+let zv = -45;
 let zh = 0;
 let xv = 0;
-let xh = 60;
+let xh = 50;
 let yv = -45;
-let yh = 60;
+let yh = 40;
 let ov = 300;
 let oh = 100;
 
