@@ -12,11 +12,21 @@
   <body>
 
     <canvas id="gfx" height="400" width="400">
-
     </canvas>
 
-
     <script src="frontEndScript.js"> </script>
+    
+    <form>
+      <label for="inputx"> x coordinate</label>
+      <input type="number" id="inputx" min="0" max="2" step="1" value="1">
+      <label for="inputy"> y coordinate</label>
+      <input type="number" id="inputy" min="0" max="2" step="1" value="1">
+      <label for="inputz"> z coordinate</label>
+      <input type="number" id="inputz" min="0" max="2" step="1" value="1">
+      <input type="button" id="pressDraw" onclick="drawFromInputs()" value="drawPoint">
+    </form>
+
+
     
     
   </body>
