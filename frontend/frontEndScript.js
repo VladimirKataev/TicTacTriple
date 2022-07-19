@@ -3,7 +3,7 @@
 //vertical use v
 //xyz are reserved for on-board positions
 
-let zv = -45;
+let zv = -50;
 let zh = 0;
 let xv = 0;
 let xh = 50;
@@ -11,8 +11,8 @@ let yv = -45;
 let yh = 40;
 let ov = 300;
 let oh = 100;
-
-
+let angle = -15;
+let stdLen = 50;
 
 
 let gfx = document.getElementById("gfx").getContext("2d");
@@ -26,8 +26,12 @@ translateObject.y *= -1;
 //in: 0,1,2
 //out:123, 234, 345
 function gridCoordsToGFXCoords(x, y, z){
+    //x += 0.5;
+    //y += 0.5;
+    //z += 0.5;
     let ansV = (x * xv) + (y*yv) + (z * zv);
     let ansH = (x * xh) + (y*yh) + (z * zh);
+    console.log(ansH, ansV);
     return {x: ansH + oh, y: ansV+ ov};
 }
 
@@ -100,6 +104,28 @@ function drawFromInputs(){
     gridBallDrawAt(x,y,z);
 }
 
+function rotate(theta){
+    angle += theta;
+
+    xh = stdLen * Math.cos(2 * Math.PI * angle / 360);
+    xv = stdLen * Math.sin(2 * Math.PI * angle / 360);
+    yh = stdLen * Math.sin(2 * Math.PI * angle / 360);
+    yv = -stdLen * Math.cos(2 * Math.PI * angle / 360);
+
+    //xv *= 0.8;
+    //yv *= 0.8;
+
+    oh = 200 - (1.5 * xh) - (1.5 * yh); 
+    ov = 200 - (1.5 * xv) - (1.5 * yv) - (1.5 * zv); 
+
+
+    console.log(oh, ov, xh, xv, yh, yv);
+    
+    drawAxes();
+    
+}
+
+rotate(15);
 drawAxes();
 
 //testDraw();
