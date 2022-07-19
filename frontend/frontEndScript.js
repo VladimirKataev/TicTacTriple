@@ -41,6 +41,8 @@ function drawCircleAt(x, y, r){
     gfx.beginPath();
     gfx.arc(x, y, r, 0, 2*Math.PI);
     gfx.strokeStyle = '#F00';
+    gfx.fillStyle = '#F00';
+    gfx.fill();
     gfx.stroke();
 }
 
@@ -75,22 +77,24 @@ function gridBallDrawAt(x, y, z){
 //x, y, z as drawn in rgb
 function drawAxes(){
     
+
     gfx.beginPath();
+    gfx.strokeStyle = "#f00";
     gfx.moveTo(oh, ov);
     gfx.lineTo(oh + xh, ov + xv);
-    gfx.strokeStyle = "#foo"
+
     gfx.stroke();
 
     gfx.beginPath();
     gfx.moveTo(oh, ov);
     gfx.lineTo(oh + yh, ov + yv);
-    gfx.strokeStyle = "#ofo"
+    gfx.strokeStyle = "#0f0";
     gfx.stroke();
 
     gfx.beginPath();
     gfx.moveTo(oh, ov);
     gfx.lineTo(oh + zh, ov + zv);
-    gfx.strokeStyle = "#oof"
+    gfx.strokeStyle = "#00f";
     gfx.stroke();
 
 
@@ -116,11 +120,11 @@ function rotate(theta){
     //yv *= 0.8;
 
     oh = 200 - (1.5 * xh) - (1.5 * yh); 
-    ov = 200 - (1.5 * xv) - (1.5 * yv) - (1.5 * zv); 
+    ov = 200 - (1.5 * xv) - (1.5 * yv) - (0.5 * zv); 
 
 
     console.log(oh, ov, xh, xv, yh, yv);
-    
+    gfx.clearRect(0,0,400,400);
     drawAxes();
     
 }
