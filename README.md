@@ -10,3 +10,13 @@ Possibly account storage with SQL
 Some design considerations include:
 27 spots vs the usual 9
 49 completion lines vs the usual 8
+
+
+Checklist:
+Make a prototype visualiser (50%)
+Find the 49 attack vectors
+Python get the game class operational
+Have the web page forms send the things to FLASK
+Get FLASK to modify the one game
+Have the webpage understand the server response
+Have Python understand multiple games at once
