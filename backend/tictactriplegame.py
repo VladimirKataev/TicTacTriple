@@ -30,10 +30,28 @@ class board:
 
         return False
 
-    
+    def __str__(self):
+        ans = ""
+        ans += "ABC\nDEF\nGHI\n"
+
+        for a in range(0, 27, 1):
+            if((1 << a) & self.takenMask):
+                if((1 < a) & self.redMask != 0):
+                    ans += 'R'
+                else:
+                    ans += 'B'
+
+            else:
+                ans += " "
+
+
+            if(a%9 == 0):
+                ans += '\n----\n'
+        return ans
 
 tstGame = board()
 
 while(not tstGame.checkGameEnd()):
-    mv = int(input("Enter you move 0-8"))
+    mv = int(input("Enter your move 0-8:"))
     tstGame.move(mv)
+    print(tstGame)
