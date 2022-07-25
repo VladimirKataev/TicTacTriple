@@ -36,7 +36,7 @@ class board:
 
         for a in range(0, 27, 1):
             if((1 << a) & self.takenMask):
-                if((1 < a) & self.redMask != 0):
+                if((1 < a) & self.redMask > 0):
                     ans += 'R'
                 else:
                     ans += 'B'
@@ -44,7 +44,8 @@ class board:
             else:
                 ans += " "
 
-
+            if(a%3 == 0):
+                ans += '\n'
             if(a%9 == 0):
                 ans += '\n----\n'
         return ans
