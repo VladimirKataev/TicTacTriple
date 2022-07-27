@@ -3,6 +3,7 @@
 //vertical use v
 //xyz are reserved for on-board positions
 
+let stdLen = 60;
 let zv = -50;
 let zh = 0;
 let xv = 0;
@@ -12,11 +13,45 @@ let yh = 40;
 let ov = 300;
 let oh = 100;
 let angle = -15;
-let stdLen = 50;
 
 
 let gfx = document.getElementById("gfx").getContext("2d");
 
+
+class Ball{
+    constructor(){
+	//integers describing the board position (0-2 inclusive)
+	this.x = 0;
+	this.y = 0;
+	this.z = 0;
+    }
+
+    pushX(){
+	this.x = (this.x + 1) % 3;
+	rotate(0);
+    }
+    pushY(){
+	this.y = (this.y + 1) % 3;
+	rotate(0);
+    }
+    pushZ(){
+	this.z = (this.z + 1) % 3;
+	rotate(0);
+    }
+    draw(){
+	gridBallDrawAt(this.x, this.y, this.z);
+    }
+
+    bitmaskPos(){
+	return 1 << ((this.x) + (this.y * 3) + (this.z * 9));
+    }
+    
+    
+}
+
+let b1 = new Ball();
+let b2 = new Ball();
+let b3 = new Ball();
 
 //to reset box origin relative to canvas center
 let translateObject = gridCoordsToGFXCoords(1,1,1);
@@ -98,6 +133,23 @@ function drawAxes(){
     gfx.stroke();
 
 
+    b1.draw();
+    b2.draw();
+    b3.draw();
+
+    document.getElementById("b1x").innerHTML = b1.x;
+    document.getElementById("b1y").innerHTML = b1.y;
+    document.getElementById("b1z").innerHTML = b1.z;
+
+    document.getElementById("b2x").innerHTML = b2.x;
+    document.getElementById("b2y").innerHTML = b2.y;
+    document.getElementById("b2z").innerHTML = b2.z;
+
+    document.getElementById("b3x").innerHTML = b3.x;
+    document.getElementById("b3y").innerHTML = b3.y;
+    document.getElementById("b3z").innerHTML = b3.z;
+
+    
 }
 
 function drawFromInputs(){
@@ -115,7 +167,8 @@ function rotate(theta){
     xv = stdLen * Math.sin(2 * Math.PI * angle / 360);
     yh = stdLen * Math.sin(2 * Math.PI * angle / 360);
     yv = -stdLen * Math.cos(2 * Math.PI * angle / 360);
-
+    zv = -stdLen;
+    zh = 0;
     //xv *= 0.8;
     //yv *= 0.8;
 
@@ -126,11 +179,11 @@ function rotate(theta){
     console.log(oh, ov, xh, xv, yh, yv);
     gfx.clearRect(0,0,400,400);
     drawAxes();
-    
+    //ball1.draw();
 }
 
 rotate(15);
-drawAxes();
+//drawAxes();
 
 //testDraw();
 

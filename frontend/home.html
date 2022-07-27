@@ -14,20 +14,35 @@
 
     <script src="frontendScript.js"> </script>
     
+    <table style="margin:auto;">
+      <tr> <td> --- </td>  <td> X-coord </td><td> Y-coord</td>  <td>Z-coord</td>  </tr>
+      <tr>
+	<td> Ball 1  </td>
+	<td><button id="b1x" onclick="b1.pushX()"> 0 </button></td>
+	<td><button id="b1y" onclick="b1.pushY()"> 0 </button></td>
+	<td><button id="b1z" onclick="b1.pushZ()"> 0 </button></td>
+      </tr>
+      <tr>
+	<td> Ball 2  </td>
+	<td><button id="b2x" onclick="b2.pushX()"> 0 </button></td>
+	<td><button id="b2y" onclick="b2.pushY()"> 0 </button></td>
+	<td><button id="b2z" onclick="b2.pushZ()"> 0 </button></td>
+      </tr>
+      <tr>
+	<td> Ball 3  </td>
+	<td><button id="b3x" onclick="b3.pushX()"> 0 </button></td>
+	<td><button id="b3y" onclick="b3.pushY()"> 0 </button></td>
+	<td><button id="b3z" onclick="b3.pushZ()"> 0 </button></td>
+      </tr>
+
+      
+    </table>
+
+
     <form>
-      <label for="inputx"> x coordinate</label>
-      <input type="number" id="inputx" min="0" max="2" step="1" value="0">
-      <label for="inputy"> y coordinate</label>
-      <input type="number" id="inputy" min="0" max="2" step="1" value="0">
-      <label for="inputz"> z coordinate</label>
-      <input type="number" id="inputz" min="0" max="2" step="1" value="0">
-      <input type="button" id="pressDraw" onclick="drawFromInputs()" value="Add ball drawing">
-      <br>
       <input type="button" id="ccw" onclick="rotate(-15)" value="rotate -15">
       <input type="button" id="cw" onclick="rotate(15)" value="rotate 15">
     </form>
-
-
     
     
   </body>
