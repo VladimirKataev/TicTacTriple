@@ -181,6 +181,23 @@ function rotate(theta){
     drawAxes();
     //ball1.draw();
 }
+let attackVectors = new Set();
+
+function formalise(){
+    let a = 0;
+    a |= b1.bitmaskPos();
+    a |= b2.bitmaskPos();
+    a |= b3.bitmaskPos();
+
+    attackVectors.add(a);
+
+    let iter = attackVectors.values();
+    let stringQ = "";
+    for(const v of iter){
+	stringQ += v + ', ';
+    }
+    console.log(stringQ);
+}
 
 rotate(15);
 //drawAxes();
