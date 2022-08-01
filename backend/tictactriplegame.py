@@ -9,8 +9,13 @@ class board:
         self.redMask = 0    #32bit int on which spots are red
         self.redTurn = True #boolean
 
-    def move(self, where): #where should be (0-8) int 
+    def move(self, where): #where should be (0-8) int
+        if(type(where) != int or where < 0 or where > 8): #make sure move is valid
+            return
         maskPos = (1 << where)
+
+        if(self.takenMask & (maskPos << 18)): #make sure the move is possible, if valid
+            return
         
         while(self.takenMask & maskPos > 0):
             maskPos = maskPos << 9
@@ -32,11 +37,11 @@ class board:
 
     def __str__(self):
         ans = ""
-        ans += "ABC\nDEF\nGHI\n"
+        ans += "ABC\nDEF\nGHI\n---\n"
 
         for a in range(0, 27, 1):
             if((1 << a) & self.takenMask):
-                if((1 < a) & self.redMask > 0):
+                if((1 << a) & self.redMask > 0):
                     ans += 'R'
                 else:
                     ans += 'B'
