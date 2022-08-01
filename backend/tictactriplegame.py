@@ -36,23 +36,21 @@ class board:
         return False
 
     def __str__(self):
-        ans = ""
-        ans += "ABC\nDEF\nGHI\n---\n"
-
-        for a in range(0, 27, 1):
-            if((1 << a) & self.takenMask):
-                if((1 << a) & self.redMask > 0):
-                    ans += 'R'
-                else:
-                    ans += 'B'
-
-            else:
-                ans += " "
-
-            if(a%3 == 0):
+        ans = "012\n345\n678\n---\n"
+        for z in range(0,3):
+            for y in range(0,3):
+                for x in range(0,3):
+                    pos = 1 << (x + (3*y) + 9*(z))
+                    if(self.takenMask & pos and self.redMask & pos):
+                        ans += 'R'
+                    elif(self.takenMask & pos):
+                        ans += 'B'
+                    else:
+                        ans += ' '
                 ans += '\n'
-            if(a%9 == 0):
-                ans += '\n----\n'
+            ans += '---'
+            if(z != 2):
+                ans += '\n'
         return ans
 
 tstGame = board()
