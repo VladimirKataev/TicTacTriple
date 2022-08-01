@@ -17,12 +17,6 @@ let stdLen = 50;
 
 let gfx = document.getElementById("gfx").getContext("2d");
 
-
-//to reset box origin relative to canvas center
-let translateObject = gridCoordsToGFXCoords(1,1,1);
-translateObject.x *= -1;
-translateObject.y *= -1;
-
 //in: 0,1,2
 //out:123, 234, 345
 function gridCoordsToGFXCoords(x, y, z){
