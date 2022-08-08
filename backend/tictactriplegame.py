@@ -1,9 +1,24 @@
+import csv
 
+attackList = []
 
+with open("vectors.csv", 'r') as csvList:
+    numReader = csv.reader(csvList)
+    for vec in numReader:
+        attackList.append(vec)
+
+#print(attackList)
+        
 class board:
     
-    attackVectors = [7] #a list of all victory condition masks (49 32bit ints), rn its '7' because first one
-                        #
+    attackVectors = attackList[0] #a list of all victory condition masks (49 32bit ints), rn its '7' because first one
+
+    for item in range(0, len(attackVectors)):
+        attackVectors[item] = int(attackVectors[item])
+
+    #print(attackVectors)
+
+    
     def __init__(self):
         self.takenMask = 0  #32bit int on occupied spot
         self.redMask = 0    #32bit int on which spots are red
