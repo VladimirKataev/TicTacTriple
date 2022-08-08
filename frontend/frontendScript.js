@@ -61,7 +61,7 @@ function gridCoordsToGFXCoords(x, y, z){
     //z += 0.5;
     let ansV = (x * xv) + (y*yv) + (z * zv);
     let ansH = (x * xh) + (y*yh) + (z * zh);
-    console.log(ansH, ansV);
+    //console.log(ansH, ansV);
     return {x: ansH + oh, y: ansV+ ov};
 }
 
@@ -171,7 +171,7 @@ function rotate(theta){
     ov = 200 - (1.5 * xv) - (1.5 * yv) - (0.5 * zv); 
 
 
-    console.log(oh, ov, xh, xv, yh, yv);
+    //console.log(oh, ov, xh, xv, yh, yv);
     gfx.clearRect(0,0,400,400);
     drawAxes();
     //ball1.draw();
