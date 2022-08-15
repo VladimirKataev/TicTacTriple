@@ -49,7 +49,7 @@ class board:
                     return True
 
         return False
-
+    
     def __str__(self):
         ans = "012\n345\n678\n---\n"
         for z in range(0,3):
@@ -70,7 +70,9 @@ class board:
 
 tstGame = board()
 
+'''
 while(not tstGame.checkGameEnd()):
     mv = int(input("Enter your move 0-8:"))
     tstGame.move(mv)
     print(tstGame)
+'''
