@@ -27,5 +27,5 @@ def receiveMove():
     #move = int(data['move'])
     #print(move)
     test.move(int(data))
-    print(test)
-    return flask.render_template('home.html')
+    #print(test)
+    return ('', 204)
