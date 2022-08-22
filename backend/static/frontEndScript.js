@@ -17,6 +17,11 @@ let stdLen = 50;
 
 let gfx = document.getElementById("gfx").getContext("2d");
 
+let eventSource = new EventSource("/serverUser")
+eventSource.onmessage = function(e){
+    console.log(e.data);
+}
+
 //in: 0,1,2
 //out:123, 234, 345
 function gridCoordsToGFXCoords(x, y, z){
@@ -25,7 +30,7 @@ function gridCoordsToGFXCoords(x, y, z){
     //z += 0.5;
     let ansV = (x * xv) + (y*yv) + (z * zv);
     let ansH = (x * xh) + (y*yh) + (z * zh);
-    console.log(ansH, ansV);
+    //console.log(ansH, ansV);
     return {x: ansH + oh, y: ansV+ ov};
 }
 
