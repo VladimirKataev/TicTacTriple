@@ -40,28 +40,7 @@ function drawCircleAt(x, y, r){
     gfx.stroke();
 }
 
-function testDraw(){
-    //drawCircleAt(1,1,1);
-    //drawCircleAt(2,2,2);
 
-    /*
-    console.log(gridCoordsToGFXCoords(0,0,0));
-    console.log(gridCoordsToGFXCoords(1,1,1));
-    console.log(gridCoordsToGFXCoords(2,2,0));
-    console.log(gridCoordsToGFXCoords(2,2,2));
-    */
-    
-    /*
-    let curr = gridCoordsToGFXCoords(0,0,0);
-    drawCircleAt(curr.x, curr.y, 20);
-    curr = gridCoordsToGFXCoords(1,1,1);
-    drawCircleAt(curr.x, curr.y, 20);
-    curr = gridCoordsToGFXCoords(2,2,2);
-    drawCircleAt(curr.x, curr.y, 20);
-    curr = gridCoordsToGFXCoords(2,2,0);
-    drawCircleAt(curr.x, curr.y, 20);
-    */
-}
 
 function gridBallDrawAt(x, y, z){
     let curr = gridCoordsToGFXCoords(x,y,z);
@@ -94,13 +73,6 @@ function drawAxes(){
 
 }
 
-function drawFromInputs(){
-    let x = document.getElementById("inputx").value;
-    let y = document.getElementById("inputy").value;
-    let z = document.getElementById("inputz").value;
-    //console.log(x, y, z)
-    gridBallDrawAt(x,y,z);
-}
 
 function rotate(theta){
     angle += theta;
@@ -117,7 +89,7 @@ function rotate(theta){
     ov = 200 - (1.5 * xv) - (1.5 * yv) - (0.5 * zv); 
 
 
-    console.log(oh, ov, xh, xv, yh, yv);
+    //console.log(oh, ov, xh, xv, yh, yv);
     gfx.clearRect(0,0,400,400);
     drawAxes();
     
@@ -126,5 +98,5 @@ function rotate(theta){
 rotate(15);
 drawAxes();
 
-//testDraw();
+
 
