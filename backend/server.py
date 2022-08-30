@@ -2,6 +2,7 @@ import flask
 import tictactriplegame as ttt
 import flask_sse
 import time
+import queue
 
 #remember to
 #export FLASK_APP=server.py
@@ -15,18 +16,11 @@ app = flask.Flask(__name__)
 sk = input("Secret Key:")
 app.config['SECRET_KEY'] = sk
 #app.register_blueprint(flask_sse, url_prefix='/stream')
-due = False
-
+listeners = []
 
 def sendGameState():
-    global due
-    #time.sleep(1.0)
-    while not due:
-        continue
-    
     ans = str(test.takenMask) + ',' + str(test.redMask) + ' '
     print("sent")
-    due = False
     return ans
     
 
@@ -37,23 +31,28 @@ def home():
 
 @app.route('/userServer', methods=['POST']) #sending data from the user to server
 def receiveMove():
-    global due
     data = flask.request.form.get('move')
     #print(data)
     #move = int(data['move'])
     #print(move)
     test.move(int(data))
     #print(test)
-    due = True
+    newState = 'data: {}\n\n'.format(sendGameState())
+    for q in listeners:
+        q.put_nowait(newState)
     return ('', 204)
 
 @app.route('/serverUser')
 def stream():
      
     def updateStream():
-        global due
+        q = queue.Queue()
+        listeners.append(q)
+        
         while True:
-
-            yield 'data: {}\n\n'.format(sendGameState())
+            state = q.get()
+            yield state
+            #ans = 'data: {}\n\n'.format(sendGameState())
+            #yield ans
             
     return flask.Response(updateStream(), mimetype='text/event-stream')
