@@ -15,13 +15,18 @@ app = flask.Flask(__name__)
 sk = input("Secret Key:")
 app.config['SECRET_KEY'] = sk
 #app.register_blueprint(flask_sse, url_prefix='/stream')
+due = False
+
 
 def sendGameState():
+    global due
+    #time.sleep(1.0)
+    while not due:
+        continue
     
-    time.sleep(1.0)
     ans = str(test.takenMask) + ',' + str(test.redMask) + ' '
-    print(ans)
-    
+    print("sent")
+    due = False
     return ans
     
 
@@ -32,19 +37,23 @@ def home():
 
 @app.route('/userServer', methods=['POST']) #sending data from the user to server
 def receiveMove():
+    global due
     data = flask.request.form.get('move')
-    print(data)
+    #print(data)
     #move = int(data['move'])
     #print(move)
     test.move(int(data))
     #print(test)
-
+    due = True
     return ('', 204)
 
 @app.route('/serverUser')
 def stream():
+     
     def updateStream():
+        global due
         while True:
+
             yield 'data: {}\n\n'.format(sendGameState())
             
     return flask.Response(updateStream(), mimetype='text/event-stream')
