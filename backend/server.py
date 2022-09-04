@@ -1,6 +1,6 @@
 import flask
 import tictactriplegame as ttt
-import flask_sse
+#import flask_sse
 import time
 import queue
 
@@ -20,7 +20,7 @@ listeners = []
 
 def sendGameState():
     ans = str(test.takenMask) + ',' + str(test.redMask) + ' '
-    print("sent")
+    #print("sent")
     return ans
     
 
@@ -31,6 +31,7 @@ def home():
 
 @app.route('/userServer', methods=['POST']) #sending data from the user to server
 def receiveMove():
+    global test
     data = flask.request.form.get('move')
     #print(data)
     #move = int(data['move'])
@@ -40,6 +41,13 @@ def receiveMove():
     newState = 'data: {}\n\n'.format(sendGameState())
     for q in listeners:
         q.put_nowait(newState)
+    if(test.checkGameEnd()):
+        test = ttt.board()
+        newState = 'data: {}\n\n'.format(sendGameState())
+        for q in listeners:
+            q.put_nowait(newState)
+        
+        return ('Game Over, board has been reset\nGo to home page, or the back button', 200)
     return ('', 204)
 
 @app.route('/serverUser')
@@ -48,7 +56,10 @@ def stream():
     def updateStream():
         q = queue.Queue()
         listeners.append(q)
-        
+        newState = 'data: {}\n\n'.format(sendGameState())
+        for q in listeners:
+            q.put_nowait(newState)
+
         while True:
             state = q.get()
             yield state
