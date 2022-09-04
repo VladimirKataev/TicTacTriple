@@ -124,10 +124,24 @@ function xyzToMask(x, y, z){
     //console.log(x, y, z, (1 << (x + (3*y) + 9*(z))));
     return 1 << (x + (3*y) + (9*z));
 } 
+function drawNums(){
+    gfx.text = "30px arial";
+    gfx.textAlign = "center";
+    gfx.fillText("0", gridCoordsToGFXCoords(0,0,2).x, gridCoordsToGFXCoords(0,0,2).y)
+    gfx.fillText("1", gridCoordsToGFXCoords(1,0,2).x, gridCoordsToGFXCoords(1,0,2).y)
+    gfx.fillText("2", gridCoordsToGFXCoords(2,0,2).x, gridCoordsToGFXCoords(2,0,2).y)
+    gfx.fillText("3", gridCoordsToGFXCoords(0,1,2).x, gridCoordsToGFXCoords(0,1,2).y)
+    gfx.fillText("4", gridCoordsToGFXCoords(1,1,2).x, gridCoordsToGFXCoords(1,1,2).y)
+    gfx.fillText("5", gridCoordsToGFXCoords(2,1,2).x, gridCoordsToGFXCoords(2,1,2).y)
+    gfx.fillText("6", gridCoordsToGFXCoords(0,2,2).x, gridCoordsToGFXCoords(0,2,2).y)
+    gfx.fillText("7", gridCoordsToGFXCoords(1,2,2).x, gridCoordsToGFXCoords(1,2,2).y)
+    gfx.fillText("8", gridCoordsToGFXCoords(2,2,2).x, gridCoordsToGFXCoords(2,2,2).y)
 
+}
 function reDraw(){
     gfx.clearRect(0,0,400,400);    
     drawAxes();
+    drawNums();
     //x, y
     let pos = [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]];
     pos.sort(vertPosScreen);
