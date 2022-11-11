@@ -43,10 +43,14 @@ function gridCoordsToGFXCoords(x, y, z){
 
 
 //pure on-canvas macro to simplify drawing
-function drawCircleAt(x, y, r, red){
+function drawCircleAt(x, y, r, red, transparent = false){
     gfx.beginPath();
     gfx.arc(x, y, r, 0, 2*Math.PI);
-    if(red){
+    if(transparent){
+	gfx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+	gfx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    }
+    else if(red){
 	gfx.strokeStyle = '#F00';
 	gfx.fillStyle = '#F00';
     }
@@ -60,9 +64,9 @@ function drawCircleAt(x, y, r, red){
 
 
 
-function gridBallDrawAt(x, y, z, red=false){
+function gridBallDrawAt(x, y, z, red=false, transparent = false){
     let curr = gridCoordsToGFXCoords(x,y,z);
-    drawCircleAt(curr.x, curr.y, 20, red);    
+    drawCircleAt(curr.x, curr.y, 20, red, transparent);    
 }
 
 //x, y, z as drawn in rgb
@@ -151,10 +155,21 @@ function reDraw(){
 	for(let p of pos){
 	    let tmpMask = xyzToMask(p[0], p[1],z);
 	    //console.log(p);
-
+	    
 	    if( maskTaken & tmpMask){
-		//draw it,                            maybe in red
-		gridBallDrawAt(p[0], p[1], z, (maskRed & tmpMask) == 0);
+		//draw it,                            maybe in red      not transparent
+		gridBallDrawAt(p[0], p[1], z, (maskRed & tmpMask) == 0, false);
+	    }
+	    else{ //untaken
+		if(z == 0){ //                    not red, transparent
+		    gridBallDrawAt(p[0], p[1], z, false, true);
+		}
+		else{ //if the ball spot below is taken, draw this one transparently
+		    let checkBelowMask = xyzToMask(p[0], p[1], z-1);
+		    if(checkBelowMask & maskTaken){
+			gridBallDrawAt(p[0], p[1], z, false, true);
+		    }
+		}
 	    }
 	}
     }
