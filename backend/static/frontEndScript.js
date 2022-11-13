@@ -16,7 +16,10 @@ let stdLen = 50;
 let maskTaken = 0;
 let maskRed = 0;
 
+
 let gfx = document.getElementById("gfx").getContext("2d");
+gfx.font = "14px arial";
+
 
 let eventSource = new EventSource("/serverUser")
 eventSource.onmessage = function(e){
@@ -145,7 +148,7 @@ function drawNums(){
 function reDraw(){
     gfx.clearRect(0,0,400,400);    
     drawAxes();
-    drawNums();
+    //drawNums();
     //x, y
     let pos = [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]];
     pos.sort(vertPosScreen);
@@ -163,11 +166,29 @@ function reDraw(){
 	    else{ //untaken
 		if(z == 0){ //                    not red, transparent
 		    gridBallDrawAt(p[0], p[1], z, false, true);
+			
+		    gfx.fillStyle = '#000';
+		    gfx.strokeStyle = '#000';
+		    let l = 48;
+		    l += p[0];
+		    l += (3*p[1]);
+		    let c = String.fromCharCode(l);
+		    let pt = gridCoordsToGFXCoords(p[0], p[1], z);
+		    gfx.fillText(c, pt.x, pt.y);
+
 		}
 		else{ //if the ball spot below is taken, draw this one transparently
 		    let checkBelowMask = xyzToMask(p[0], p[1], z-1);
 		    if(checkBelowMask & maskTaken){
 			gridBallDrawAt(p[0], p[1], z, false, true);
+			gfx.fillStyle = '#000';
+			gfx.strokeStyle = '#000';
+			let l = 48;
+			l += p[0];
+			l += (3*p[1]);
+			let c = String.fromCharCode(l);
+			let pt = gridCoordsToGFXCoords(p[0], p[1], z);
+			gfx.fillText(c, pt.x, pt.y);
 		    }
 		}
 	    }
