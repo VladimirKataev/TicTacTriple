@@ -21,6 +21,7 @@ let gfx = document.getElementById("gfx").getContext("2d");
 gfx.font = "14px arial";
 
 
+
 let eventSource = new EventSource("/serverUser")
 eventSource.onmessage = function(e){
     let msg = (e.data);
@@ -168,14 +169,21 @@ function reDraw(){
 	    else{ //untaken
 		if(z == 0){ //                    not red, transparent
 		    gridBallDrawAt(p[0], p[1], z, false, true);
-			
+
+		    let pt = gridCoordsToGFXCoords(p[0], p[1], z);
+		    pt.y += 8;
+		    pt.x -= 4;
+		    gfx.fillStyle = '#fff';
+		    gfx.fillRect(pt.x, pt.y - 15, 10, 15);
+		    
 		    gfx.fillStyle = '#000';
 		    gfx.strokeStyle = '#000';
 		    let l = 48;
 		    l += p[0];
 		    l += (3*p[1]);
 		    let c = String.fromCharCode(l);
-		    let pt = gridCoordsToGFXCoords(p[0], p[1], z);
+
+
 		    gfx.fillText(c, pt.x, pt.y);
 
 		}
@@ -183,13 +191,22 @@ function reDraw(){
 		    let checkBelowMask = xyzToMask(p[0], p[1], z-1);
 		    if(checkBelowMask & maskTaken){
 			gridBallDrawAt(p[0], p[1], z, false, true);
+
+			let pt = gridCoordsToGFXCoords(p[0], p[1], z);
+			pt.y += 8;
+			pt.x -= 4;
+			
+			gfx.fillStyle = '#fff';
+			gfx.fillRect(pt.x, pt.y - 15, 10, 15);
+			
 			gfx.fillStyle = '#000';
 			gfx.strokeStyle = '#000';
 			let l = 48;
 			l += p[0];
 			l += (3*p[1]);
 			let c = String.fromCharCode(l);
-			let pt = gridCoordsToGFXCoords(p[0], p[1], z);
+
+
 			gfx.fillText(c, pt.x, pt.y);
 		    }
 		}
