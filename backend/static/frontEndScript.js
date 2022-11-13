@@ -62,6 +62,8 @@ function drawCircleAt(x, y, r, red, transparent = false){
 	gfx.fillStyle = '#00F';
     }
     gfx.fill();
+    gfx.lineWidth = 5;
+    gfx.strokeStyle = '#000';
     gfx.stroke();
 }
 
@@ -147,7 +149,7 @@ function drawNums(){
 }
 function reDraw(){
     gfx.clearRect(0,0,400,400);    
-    drawAxes();
+    //drawAxes();
     //drawNums();
     //x, y
     let pos = [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]];
